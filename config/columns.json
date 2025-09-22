@@ -1,0 +1,118 @@
+{
+  "curso": [
+    "Curso",
+    "Curso Nome",
+    "Nome do Curso"
+  ],
+  "situacao_curso": [
+    "Situação no Curso",
+    "Situacao no Curso",
+    "Status no Curso"
+  ],
+  "situacao_sistema": [
+    "Situação no Sistema",
+    "Situacao no Sistema"
+  ],
+  "data_matricula": [
+    "Data de Matrícula",
+    "Data da Matrícula",
+    "Data Matricula",
+    "Matricula Data"
+  ],
+  "data_conclusao": [
+    "Data de Conclusão de Curso",
+    "Data de Conclusão",
+    "Conclusão Data"
+  ],
+  "data_integralizacao": [
+    "Data de Integralização",
+    "Data de Integralizacao"
+  ],
+  "modalidade": [
+    "Modalidade"
+  ],
+  "turno": [
+    "Turno",
+    "Período",
+    "Periodo"
+  ],
+  "forma_ingresso": [
+    "Forma de Ingresso",
+    "Forma Ingresso"
+  ],
+  "cota_mec": [
+    "Cota MEC",
+    "Cota_MEC"
+  ],
+  "cota_sistec": [
+    "Cota Sistec",
+    "Cota_Sistec"
+  ],
+  "etnia_raca": [
+    "Etnia/Raça",
+    "Etnia - Raça",
+    "Raca/Cor",
+    "Raça/Cor"
+  ],
+  "necessidades_especiais": [
+    "Deficiências/Transtornos/Superdotação",
+    "Necessidades Especiais"
+  ],
+  "frequencia_periodo": [
+    "Frequência no Período",
+    "Frequencia no Periodo"
+  ],
+  "media_final_periodo": [
+    "Média Final no Período",
+    "Media Final no Periodo"
+  ],
+  "pendencias_conclusao": [
+    "Pendências de Requisitos de Conclusão",
+    "Pendencias Conclusao"
+  ],
+  "estado": [
+    "Estado",
+    "UF"
+  ],
+  "cidade": [
+    "Cidade",
+    "Município",
+    "Municipio"
+  ],
+  "polo": [
+    "Polo",
+    "Pólo"
+  ],
+  "transporte_publico": [
+    "Transporte Escolar: Poder Público",
+    "Transporte Escolar - Poder Publico"
+  ],
+  "transporte_tipo": [
+    "Transporte Escolar: Tipo de Veículo",
+    "Transporte Escolar - Tipo de Veiculo"
+  ],
+  "percentual_progresso": [
+    "Percentual de Progresso",
+    "Progresso (%)",
+    "% Progresso"
+  ],
+  "ano_ingresso": [
+    "Ano de Ingresso",
+    "Ano_Ingresso"
+  ],
+  "sexo": [
+    "Sexo",
+    "Gênero"
+  ],
+  "idade": [
+    "Idade"
+  ],
+  "matricula": [
+    "Matrícula",
+    "Matricula"
+  ],
+  "aluno_nome": [
+    "Nome do Aluno",
+    "Nome"
+  ]
+}

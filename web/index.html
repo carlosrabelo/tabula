@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Painel Acadêmico</title>
+<link href="assets/styles.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="js/main.js" type="module"></script>
+</head>
+<body class="full-width">
+<header class="page-header">
+<div class="container header-grid">
+  <div class="header-column header-title">
+    <h1>Painel Acadêmico</h1>
+  </div>
+  <div class="header-column header-text">
+    <p>Visualize indicadores básicos sobre situação, permanência e inclusão dos estudantes.</p>
+  </div>
+</div>
+<div class="header-note-wrapper">
+  <p class="header-note">⚠️ Dados do painel em validação.</p>
+</div>
+</header>
+<main class="container">
+<section aria-labelledby="sec-overview">
+<h2 id="sec-overview">Visão Geral</h2>
+<div class="card-grid">
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=situacao">Situação dos Alunos</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Quantidade de alunos por situação" id="chartSituacao" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=modalidade">Modalidades dos Cursos</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição de alunos por modalidade" id="chartModalidade" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=turno">Distribuição por Turno</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Quantidade de alunos por turno" id="chartTurno" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=progresso">Progresso no Curso</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição de progresso" id="chartProgresso" role="img"></canvas>
+</div>
+</article>
+</div>
+</section>
+<section aria-labelledby="sec-inclusao">
+<h2 id="sec-inclusao">Inclusão &amp; Acesso</h2>
+<div class="card-grid">
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=forma_ingresso">Formas de Ingresso</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição por forma de ingresso" id="chartFormaIngresso" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=cota_mec">Cota MEC</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição por cota MEC" id="chartCotaMec" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=cota_sistec">Cota Sistec</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição por cota Sistec" id="chartCotaSistec" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=etnia">Etnia/Raça</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição de alunos por etnia ou raça" id="chartEtnia" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=necessidades">Necessidades Especiais</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Alunos com e sem necessidades especiais" id="chartNecessidades" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=tipo_escola">Tipo de Escola de Origem</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição por tipo de escola de origem" id="chartTipoEscola" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=natureza">Natureza de Participação</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição por natureza de participação" id="chartNatureza" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="chart.html?chart=transporte">Transporte Escolar</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Distribuição por tipo de transporte escolar" id="chartTransporte" role="img"></canvas>
+</div>
+</article>
+<article class="card">
+<h3 aria-level="3" role="heading"><a class="chart-link" href="natureza_escola.html">Natureza e Escola</a></h3>
+<div class="chart-wrapper">
+<canvas aria-label="Relação entre Natureza de Participação e Tipo de Escola de Origem" id="chartNaturezaEscola" role="img"></canvas>
+</div>
+</article>
+</div>
+</section>
+</main>
+<footer class="page-footer">
+<div class="container">
+<p>Atualizado a partir do SUAP.</p>
+</div>
+</footer>
+</body>
+</html>

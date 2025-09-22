@@ -1,0 +1,19 @@
+{
+  "progress_buckets": [
+    0,
+    25,
+    50,
+    75,
+    100
+  ],
+  "status_map": {
+    "CONCLU": "Concluído",
+    "FORM": "Concluído",
+    "ATIV": "Ativo",
+    "CURS": "Ativo",
+    "TRANC": "Trancado",
+    "CANCEL": "Evasão/Cancelado",
+    "EVAD": "Evasão/Cancelado",
+    "DESL": "Evasão/Cancelado"
+  }
+}
