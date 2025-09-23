@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Situação por Escola | Painel Acadêmico</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/chart-page.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script type="module">
+        import { renderSituacaoEscolaChart } from './js/charts/situacao_escola.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSituacaoEscolaChart();
+        });
+    </script>
+  </head>
+  <body class="single-chart-page">
+    <header class="single-chart-header">
+      <a class="back-link" href="index.html">← Voltar para o painel</a>
+      <h1>Situação por Tipo de Escola de Origem</h1>
+    </header>
+    <main class="single-chart-main">
+        <div class="chart-controls">
+            <button id="switchGroup">Inverter Agrupamento</button>
+        </div>
+      <div class="single-chart-container">
+        <canvas id="chartSituacaoEscola" aria-live="polite"></canvas>
+      </div>
+    </main>
+  </body>
+</html>

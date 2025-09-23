@@ -36,29 +36,32 @@
 
 .single-chart-main {
   flex: 1;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
-.single-chart-container {
-  width: min(1100px, 95vw);
-  aspect-ratio: 16 / 9;
-  background: var(--surface-color);
-  border-radius: 18px;
-  padding: clamp(1rem, 3vw, 2rem);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-color);
+.chart-controls {
   display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.single-chart-container canvas {
-  width: 100% !important;
-  height: 100% !important;
+.chart-controls button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
 }
 
-@media (max-width: 768px) {
-  .single-chart-container {
-    aspect-ratio: 4 / 3;
-  }
+.chart-controls button:hover,
+.chart-controls button:focus-visible {
+  background-color: var(--bg-color);
+  border-color: var(--primary-color);
 }

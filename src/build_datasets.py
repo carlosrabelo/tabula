@@ -126,6 +126,10 @@ OUTPUT_SPECS = {
         "requires": ["cota_sistec"],
         "sources_all": ["cota_sistec"],
     },
+    "cotas.csv": {
+        "requires": ["cota_mec", "cota_sistec"],
+        "sources_all": ["cota_mec", "cota_sistec"],
+    },
     "etnia_raca.csv": {
         "requires": ["etnia_raca"],
         "sources_all": ["etnia_raca"],
@@ -143,12 +147,17 @@ OUTPUT_SPECS = {
         "sources_all": ["natureza_participacao"],
     },
     "transporte_tipo.csv": {
-        "requires": ["transporte_tipo"],
-        "sources_all": ["transporte_tipo"],
+        "requires": ["transporte_publico", "transporte_tipo"],
+        "sources_all": ["transporte_publico", "transporte_tipo"],
     },
     "natureza_escola.csv": {
         "requires": ["natureza_participacao", "tipo_escola_origem"],
         "sources_all": ["natureza_participacao", "tipo_escola_origem"],
+    },
+    "situacao_escola.csv": {
+        "requires": ["status_simplificado", "tipo_escola_origem"],
+        "sources_any": [["situacao_curso", "situacao_sistema"]],
+        "sources_all": ["tipo_escola_origem"],
     },
 }
 
@@ -439,6 +448,31 @@ def build_natureza_participacao(df: pd.DataFrame):
     return build_categoria(df, "natureza_participacao", "Natureza_Participacao")
 
 
+def build_transporte_combinado(df: pd.DataFrame):
+    """Gera o dataset de transporte combinado.""" 
+    df_copy = df.copy()
+    # Combine as colunas, tratando valores ausentes
+    df_copy["transporte_combinado"] = (
+        df_copy["transporte_tipo"].fillna("Não informado")
+        + " - "
+        + df_copy["transporte_publico"].fillna("Não informado")
+    )
+    # Limpa entradas que são apenas separadores
+    df_copy["transporte_combinado"] = df_copy["transporte_combinado"].replace(
+        "Não informado - Não informado", "Não informado"
+    )
+    return build_categoria(df_copy, "transporte_combinado", "Transporte_Tipo")
+
+
+def build_situacao_escola(df: pd.DataFrame):
+    """Gera o dataset combinado de situação e tipo de escola de origem."""
+    return (
+        df.groupby(["status_simplificado", "tipo_escola_origem"])
+        .size()
+        .reset_index(name="qtd")
+    )
+
+
 def build_natureza_escola(df: pd.DataFrame):
     """Gera o dataset combinado de natureza de participação e tipo de escola."""
     return (
@@ -448,20 +482,38 @@ def build_natureza_escola(df: pd.DataFrame):
     )
 
 
+def build_cotas(df: pd.DataFrame):
+    """Gera o dataset combinado de cotas MEC e Sistec."""
+    if "cota_mec" not in df.columns or "cota_sistec" not in df.columns:
+        return pd.DataFrame()
+    mec_df = df.groupby("cota_mec").size().reset_index(name="qtd")
+    mec_df["Tipo_Cota"] = "MEC"
+    mec_df = mec_df.rename(columns={"cota_mec": "Categoria"})
+    sistec_df = df.groupby("cota_sistec").size().reset_index(name="qtd")
+    sistec_df["Tipo_Cota"] = "Sistec"
+    sistec_df = sistec_df.rename(columns={"cota_sistec": "Categoria"})
+    combined_df = pd.concat([mec_df, sistec_df], ignore_index=True)
+    return combined_df[["Tipo_Cota", "Categoria", "qtd"]]
+
+
 BUILDERS = {
     "alunos_por_situacao.csv": build_alunos_por_situacao,
     "modalidade.csv": build_modalidade,
     "dist_percentual_progresso.csv": build_dist_progresso,
     "turno.csv": lambda df: build_categoria(df, "turno", "Turno"),
-    "forma_ingresso.csv": lambda df: build_categoria(df, "forma_ingresso", "Forma_Ingresso"),
+    "forma_ingresso.csv": lambda df: build_categoria(
+        df, "forma_ingresso", "Forma_Ingresso"
+    ),
     "cota_mec.csv": lambda df: build_categoria(df, "cota_mec", "Cota_MEC"),
     "cota_sistec.csv": lambda df: build_categoria(df, "cota_sistec", "Cota_Sistec"),
+    "cotas.csv": build_cotas,
     "etnia_raca.csv": lambda df: build_categoria(df, "etnia_raca", "Etnia_Raca"),
     "necessidades_especiais.csv": lambda df: build_categoria(df, "tem_ne", "Tem_NE"),
     "tipo_escola_origem.csv": build_tipo_escola,
     "natureza_participacao.csv": build_natureza_participacao,
-    "transporte_tipo.csv": lambda df: build_categoria(df, "transporte_tipo", "Transporte_Tipo"),
+    "transporte_tipo.csv": build_transporte_combinado,
     "natureza_escola.csv": build_natureza_escola,
+    "situacao_escola.csv": build_situacao_escola,
 }
 
 

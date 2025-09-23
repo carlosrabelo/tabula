@@ -3,8 +3,7 @@ import { renderModalidadeChart } from './charts/modalidade.js';
 import { renderTurnoChart } from './charts/turno.js';
 import { renderProgressoChart } from './charts/progresso.js';
 import { renderFormaIngressoChart } from './charts/forma_ingresso.js';
-import { renderCotaMecChart } from './charts/cota_mec.js';
-import { renderCotaSistecChart } from './charts/cota_sistec.js';
+import { renderCotasChart } from './charts/cotas.js';
 import { renderEtniaChart } from './charts/etnia.js';
 import { renderNecessidadesChart } from './charts/necessidades.js';
 import { renderTipoEscolaChart } from './charts/tipo_escola.js';
@@ -38,15 +37,10 @@ const chartMap = {
     canvasId: 'chartFormaIngresso',
     render: renderFormaIngressoChart,
   },
-  cota_mec: {
-    title: 'Distribuição por Cota MEC',
-    canvasId: 'chartCotaMec',
-    render: renderCotaMecChart,
-  },
-  cota_sistec: {
-    title: 'Distribuição por Cota Sistec',
-    canvasId: 'chartCotaSistec',
-    render: renderCotaSistecChart,
+  cotas: {
+    title: 'Cotas (MEC/Sistec)',
+    canvasId: 'chartCotas',
+    render: renderCotasChart,
   },
   etnia: {
     title: 'Etnia/Raça',
