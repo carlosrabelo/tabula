@@ -65,3 +65,30 @@
   background-color: var(--bg-color);
   border-color: var(--primary-color);
 }
+
+.chart-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  font-style: italic;
+  min-height: 200px;
+  width: 100%;
+}
+
+.single-chart-container {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.single-chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

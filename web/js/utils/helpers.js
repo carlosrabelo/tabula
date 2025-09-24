@@ -50,12 +50,11 @@ export function datasetMissing(name) {
 }
 
 export function renderPlaceholder(canvas, message) {
-  if (!canvas) {
+  if (!canvas || !canvas.parentNode) {
     return;
   }
-  const wrapper = canvas.closest('.chart-wrapper');
-  if (!wrapper) {
-    return;
-  }
-  wrapper.innerHTML = `<div class="chart-placeholder">${message}</div>`;
+  const placeholder = document.createElement('div');
+  placeholder.className = 'chart-placeholder';
+  placeholder.textContent = message;
+  canvas.parentNode.replaceChild(placeholder, canvas);
 }

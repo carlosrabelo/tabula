@@ -11,19 +11,20 @@ const DATASET_PATH = 'datasets/natureza_escola.csv';
 
 let chart;
 let currentGrouping = 'natureza'; // 'natureza' or 'escola'
+let originalRows = [];
 
-function processData(rows, grouping) {
+function processData(grouping) {
   const group1 = grouping === 'natureza' ? 'natureza_participacao' : 'tipo_escola_origem';
   const group2 = grouping === 'natureza' ? 'tipo_escola_origem' : 'natureza_participacao';
 
-  const labels = [...new Set(rows.map(row => row[group1]))];
-  const categories = [...new Set(rows.map(row => row[group2]))];
+  const labels = [...new Set(originalRows.map(row => row[group1]))];
+  const categories = [...new Set(originalRows.map(row => row[group2]))];
 
   const datasets = categories.map((category, index) => {
     return {
       label: category,
       data: labels.map(label => {
-        const row = rows.find(r => r[group1] === label && r[group2] === category);
+        const row = originalRows.find(r => r[group1] === label && r[group2] === category);
         return row ? Number(row.qtd) : 0;
       }),
       backgroundColor: getColorByIndex(index),
@@ -33,8 +34,8 @@ function processData(rows, grouping) {
   return { labels, datasets };
 }
 
-function updateChart(rows) {
-  const { labels, datasets } = processData(rows, currentGrouping);
+function updateChart() {
+  const { labels, datasets } = processData(currentGrouping);
   const group1 = currentGrouping === 'natureza' ? 'Natureza de Participação' : 'Tipo de Escola de Origem';
   const group2 = currentGrouping === 'natureza' ? 'Tipo de Escola de Origem' : 'Natureza de Participação';
 
@@ -51,22 +52,21 @@ export async function renderNaturezaEscolaChart() {
     return;
   }
 
-  let rows;
   try {
-    rows = await loadCSV(DATASET_PATH);
+    originalRows = await loadCSV(DATASET_PATH);
   } catch (error) {
     datasetMissing(DATASET_PATH);
     renderPlaceholder(canvas, 'Sem dados para o gráfico de Natureza e Escola.');
     return;
   }
 
-  if (!rows.length) {
+  if (!originalRows.length) {
     datasetMissing(DATASET_PATH);
     renderPlaceholder(canvas, 'Sem registros para o gráfico de Natureza e Escola.');
     return;
   }
 
-  const { labels, datasets } = processData(rows, currentGrouping);
+  const { labels, datasets } = processData(currentGrouping);
   const group1 = currentGrouping === 'natureza' ? 'Natureza de Participação' : 'Tipo de Escola de Origem';
   const group2 = currentGrouping === 'natureza' ? 'Tipo de Escola de Origem' : 'Natureza de Participação';
 
@@ -117,7 +117,7 @@ export async function renderNaturezaEscolaChart() {
   if (switchButton) {
     switchButton.addEventListener('click', () => {
       currentGrouping = currentGrouping === 'natureza' ? 'escola' : 'natureza';
-      updateChart(rows);
+      updateChart();
     });
   }
 }
