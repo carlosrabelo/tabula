@@ -2,6 +2,10 @@
 .RECIPEPREFIX := >
 SHELL := /usr/bin/env bash
 
+# Carrega variáveis de ambiente do arquivo .env, se existir
+-include .env
+export
+
 PYTHON                 ?= python3
 PIP                    ?= pip3
 DOCKER                 ?= docker
@@ -22,14 +26,14 @@ DOCKER_DATASETS_VOLUME := $(if $(HOST_DATASETS_DIR),-v $(HOST_DATASETS_DIR):/app
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install datasets serve docker-build docker-run docker-push docker-tag docker-shell sync-web clean clean-datasets
+.PHONY: help install datasets run docker-build docker-run docker-push docker-tag docker-shell sync-web clean clean-datasets
 
 help:
 > @echo ""
 > @echo "Targets disponíveis para este projeto:"
 > @echo "  install        - instala dependências Python locais (pandas/xlrd/openpyxl)"
 > @echo "  datasets       - processa data/master.xls e gera CSVs em $(DATA_OUTPUT)"
-> @echo "  serve          - roda um servidor estático via python -m http.server (porta $(PORT))"
+> @echo "  run            - roda um servidor estático via python -m http.server (porta $(PORT))"
 > @echo "  docker-build   - builda a imagem $(FULL) com HTML placeholder (sem datasets)"
 > @echo "  docker-run     - executa a imagem em modo interativo expondo a porta $(PORT)"
 > @echo "  docker-push    - envia a imagem para o registry configurado em IMAGE"
@@ -49,7 +53,7 @@ install:
 datasets:
 > ./$(BUILD_SCRIPT) --in $(DATA_INPUT) --out $(DATA_OUTPUT)
 
-serve: datasets
+run: datasets
 > @echo "Servindo web/ em http://localhost:$(PORT)"
 > $(PYTHON) -m http.server $(PORT) --directory web
 
